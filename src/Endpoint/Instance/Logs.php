@@ -27,8 +27,11 @@ class Logs extends AbstractEndpoint
     public function all($name)
     {
         $logs = [];
+        $config = [
+            "project"=>$this->client->getProject()
+        ];
 
-        foreach ($this->get($this->getEndpoint().$name.'/logs/') as $log) {
+        foreach ($this->get($this->getEndpoint().$name.'/logs/', $config) as $log) {
             $logs[] = str_replace(
                 '/'.$this->client->getApiVersion().$this->getEndpoint().$name.'/logs/',
                 '',
@@ -48,7 +51,10 @@ class Logs extends AbstractEndpoint
      */
     public function read($name, $log)
     {
-        return $this->get($this->getEndpoint().$name.'/logs/'.$log);
+        $config = [
+            "project"=>$this->client->getProject()
+        ];
+        return $this->get($this->getEndpoint().$name.'/logs/'.$log, $config);
     }
 
     /**
@@ -60,6 +66,9 @@ class Logs extends AbstractEndpoint
      */
     public function remove($name, $log)
     {
-        return $this->delete($this->getEndpoint().$name.'/logs/'.$log);
+        $config = [
+            "project"=>$this->client->getProject()
+        ];
+        return $this->delete($this->getEndpoint().$name.'/logs/'.$log, $config);
     }
 }
