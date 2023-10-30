@@ -85,4 +85,20 @@ class Networks extends AbstractEndpoint
 
         return $this->delete($this->getEndpoint().$name, $config);
     }
+
+    /**
+     * Show information on used network leases
+     *
+     * @param  string $name name of network
+     * @return object
+     */
+    public function leases($name)
+    {
+        $config = [
+            "project"=>$this->client->getProject()
+        ];
+
+        return $this->get($this->getEndpoint().$name . '/leases', $config);
+    }
+
 }
